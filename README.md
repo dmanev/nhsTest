@@ -13,7 +13,7 @@ April 15 , 2013 Thousands of GP practices around the country that have benefited
 
 ### Prerequisites
 
-Python 2.7.x installed on the PC.
+Python 2.7.x installed on the PC (Windows 7 or Ubuntu >= 12.04)
 
 ### Installing
 
@@ -28,7 +28,7 @@ Python 2.7.x installed on the PC.
 
 OR
 
-./ns.py -o "Care Quality  Commission"                                                                                 
+# ./ns.py -o "Care Quality  Commission"                                                                                 
 0, 1, 2, 3, 4, 5, 6
 
 (make sure ns.py is with executable flag for Linux/Unix environment )
@@ -37,7 +37,7 @@ OR
 
 ### Running the test
 ```
-python -m unittest test.test_newssearch                                                                              
+# python -m unittest test.test_newssearch                                                                              
 .keyword not found: 'admission4'
 keyword not found: 'Alzheimer1'
 ...
