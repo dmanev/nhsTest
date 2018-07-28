@@ -31,9 +31,9 @@ OR
 # ./ns.py -o "Care Quality  Commission"                                                                                 
 0, 1, 2, 3, 4, 5, 6
 
-(make sure ns.py is with executable flag for Linux/Unix environment )
 ```
-
+Make sure ns.py is with executable flag for Linux/Unix environment in order
+to execute it directly.
 
 ### Running the test
 ```
