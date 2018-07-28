@@ -85,10 +85,24 @@ $ curl -XPUT $RIAK_HOST/buckets/hscicNews/keys/result:1\
      -H 'Content-Type: application/json' \
      -d '{"content_s":"July 9 , 2013 : The HSCIC has extended the consultation..."}'
 
+$ curl -XPUT $RIAK_HOST/buckets/hscicNews/keys/result:2\
+      -H "x-riak-index-date: 2013-06-19"
+      -H 'Content-Type: application/json' \
+      -d '{"content_s":"June 19 , 2013 : New figures from the Health and Social Caren..."}'
 ```
 
 ### Query news by month/year
 ```
-curl $RIAK_HOST/types/indexes/buckets/hscicNews/index/date/2013-06-01/2013-06-31??return_terms=true
+$ curl $RIAK_HOST/types/indexes/buckets/hscicNews/index/date/2013-06-01/2013-06-31??return_terms=true
 
+{
+  "results": [
+    {
+      "2013-06-05": "0"
+    },
+    {
+      "2013-06-19": "2"
+    }
+  ]
+}
 ```
