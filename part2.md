@@ -70,6 +70,10 @@ $ curl "$RIAK_HOST/search/query/newssearch?wt=json&q=query_s:Care%20Quality%20Co
 ## Monthly indexes
 
 ### Insert indexes
+Current insert requests make the assumption that there is one news per date.
+If this is not the case, hour, minute and second could be included or
+more complex enumeration if two or more news collide to the second.
+
 ```
 $ curl -XPUT $RIAK_HOST/buckets/hscicNews/keys/result:0\
      -H "x-riak-index-date: 2013-06-05"
@@ -80,5 +84,11 @@ $ curl -XPUT $RIAK_HOST/buckets/hscicNews/keys/result:1\
      -H "x-riak-index-date: 2013-07-09"
      -H 'Content-Type: application/json' \
      -d '{"content_s":"July 9 , 2013 : The HSCIC has extended the consultation..."}'
+
+```
+
+### Query news by month/year
+```
+curl $RIAK_HOST/types/indexes/buckets/hscicNews/index/date/2013-06-01/2013-06-31??return_terms=true
 
 ```
