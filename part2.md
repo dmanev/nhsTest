@@ -16,11 +16,20 @@ so the following listing is based only on RIAK's documentation
 ```
 $ curl -XPUT $RIAK_HOST/search/index/newssearch
 ```
+
+The "newssearch" index will be responsible for indexing the queries sent to
+the ns.py application.
+
 ### Create bucket type
 ```
 $ riak-admin bucket-type create queries '{"props":{"search_index":"newssearch"}}'
 $ riak-admin bucket-type activate queries
 ```
+
+The bucket type "queries" will store the two types of queries: OR and AND based
+search queries. Both queries will be stored in separate bucktes: "orquery" and
+"andquery". Follow the text bellow:
+
 ### Add top 5 queries
 
 ```
@@ -44,6 +53,9 @@ $ curl -XPUT $RIAK_HOST/types/queries/buckets/andquery/keys/generalpopulationalz
      -H 'Content-Type: application/json' \
      -d '{"query_s":"general population Alzheimer", "type_s":"AND", "result_s":"6"}'
 ```
+
+Of course the requests could make direct call to ns.py command. They are written
+this way for clarity.
 
 ### Query
 ```
