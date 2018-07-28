@@ -1,4 +1,4 @@
-### Setup - RIAK not available
+## Setup - RIAK not available
 * RIAK version 2.2.3 installed via official Ubuntu repository
 ```
 $ export RIAK_HOST="http://localhost:8098"
@@ -10,15 +10,17 @@ checkup on google shows it might be problem in installation
 
 so the following listing is based only on RIAK's documentation
 
+## Common query caching
+
 ### Create search index
 ```
 $ curl -XPUT $RIAK_HOST/search/index/newssearch
 ```
 ### Create bucket type
-
-riak-admin bucket-type create queries '{"props":{"search_index":"newssearch"}}'
-riak-admin bucket-type activate queries
-
+```
+$ riak-admin bucket-type create queries '{"props":{"search_index":"newssearch"}}'
+$ riak-admin bucket-type activate queries
+```
 ### Add top 5 queries
 
 ```
@@ -63,4 +65,20 @@ $ curl "$RIAK_HOST/search/query/newssearch?wt=json&q=query_s:Care%20Quality%20Co
     }
   ]
 }
+```
+
+## Monthly indexes
+
+### Insert indexes
+```
+$ curl -XPUT $RIAK_HOST/buckets/hscicNews/keys/result:0\
+     -H "x-riak-index-date: 2013-06-05"
+     -H 'Content-Type: application/json' \
+     -d '{"content_s":"June 5 , 2013 : The majority of carers say they are extremely..."}'
+
+$ curl -XPUT $RIAK_HOST/buckets/hscicNews/keys/result:1\
+     -H "x-riak-index-date: 2013-07-09"
+     -H 'Content-Type: application/json' \
+     -d '{"content_s":"July 9 , 2013 : The HSCIC has extended the consultation..."}'
+
 ```
